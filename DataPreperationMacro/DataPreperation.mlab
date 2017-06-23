@@ -1,0 +1,476 @@
+// MDL v1 utf8
+network  {
+  watchlist = ""
+}
+module Scale {
+  internal  {
+    frame = "1253 1133 184 72"
+    moduleGroupName = "CT image processing"
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "1053 431 238 337"
+        sizeHint = "233 337"
+        wasOpen = yes
+      }
+    }
+  }
+  fields  {
+    instanceName = ScaleCT
+    inputMin = -3024
+    inputMax = 3071
+    updateMode = AutoUpdateMinMaxOn
+    useTrueRange = FALSE
+    typeSelect = UInt16
+    outputMin = 0
+    outputMax = 65535
+  }
+}
+module AddNoise {
+  internal  {
+    frame = "1301 973 88 56"
+    moduleGroupName = "CT image processing"
+    windows  {
+      window _default {
+        geometry = "875 502 387 215"
+        sizeHint = "353 215"
+        wasOpen = yes
+      }
+      window _automatic {
+        geometry = "1353 270 500 600"
+        sizeHint = "260 223"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = AddNoise
+    amplitude = 2500
+    addInput = TRUE
+    randSeed = -1
+    noiseType = SaltPepper
+    mean = 0
+    sigma = 500
+    sigmaIn = 0
+    sigmaOut = 0
+    amplitude2 = 65535
+    density = 0.050000001
+  }
+}
+module AffineTransformation2D {
+  internal  {
+    frame = "1257 1049 176 64"
+    moduleGroupName = "CT image processing"
+    windows  {
+      window _automatic {
+        geometry = "723 273 500 600"
+        sizeHint = "260 223"
+        wasOpen = no
+      }
+      window _default {
+        geometry = "1211 401 391 282"
+        sizeHint = "190 214"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = AffineTransformation2DCT
+    optParameters = "0 0 0 0 1 1 "
+    translationX = 0
+    translationY = 0
+    rotation = 0
+    shearing = 0
+    scalingX = 1
+    scalingY = 1
+  }
+}
+module AffineTransformation2D {
+  internal  {
+    frame = "1497 988 184 64"
+    moduleGroupName = "PET image processing"
+    windows  {
+      window _default {
+        geometry = "872 463 235 214"
+        sizeHint = "192 214"
+        wasOpen = no
+      }
+      window _automatic {
+        geometry = "0 0 0 0"
+        sizeHint = "260 223"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = AffineTransformation2DPET
+    optParameters = "0 0 0 0 1 1 "
+    translationX = 0
+    translationY = 0
+    rotation = 0
+    shearing = 0
+    scalingX = 1
+    scalingY = 1
+  }
+}
+module Reformat {
+  internal  {
+    frame = "1545 1232 104 56"
+    moduleGroupName = "PET image processing"
+    windows  {
+      window _default {
+        geometry = "766 244 418 652"
+        sizeHint = "402 652"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = Reformat
+    matrix = "1 0 0 0
+0 1 0 0
+0 0 1 0
+0 0 0 1"
+    useInventorComposition = FALSE
+    composeMatrix = TRUE
+    scale = "1 1 1"
+    rotation = "0 0 1 0"
+    translation = "0 0 0"
+    center = "-0.379786999999993 -0.37978700000005 -435.25"
+    fillValue = 0
+    interactive = TRUE
+    autoCenter = TRUE
+    interpolation = Trilinear
+    borderHandling = ClampToEdge
+    memoryAccess = Global
+    button1Translate = Pressed
+    button2Translate = Released
+    button3Translate = Released
+    shiftTranslate = Released
+    ctrlTranslate = Released
+    altTranslate = Released
+    button1Rotate = Pressed
+    button2Rotate = Released
+    button3Rotate = Released
+    shiftRotate = Pressed
+    ctrlRotate = Released
+    altRotate = Released
+    updateMode = AutoUpdate
+  }
+}
+module Window {
+  internal  {
+    frame = "1305 893 80 56"
+    moduleGroupName = "CT image processing"
+    windows  {
+      window _default {
+        geometry = "838 519 266 64"
+        sizeHint = "202 64"
+        wasOpen = yes
+      }
+    }
+  }
+  fields  {
+    instanceName = Window
+    windowCenter = 30500
+    windowWidth = 3600
+    imageMin = 0
+    imageMax = 65535
+  }
+}
+module Scale {
+  internal  {
+    frame = "1497 896 184 72"
+    moduleGroupName = "PET image processing"
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "1053 431 238 337"
+        sizeHint = "233 337"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = ScalePET
+    inputMin = 0
+    inputMax = 1
+    updateMode = AutoUpdateMinMaxOn
+    useTrueRange = FALSE
+    typeSelect = UInt8
+    outputMin = 0
+    outputMax = 255
+  }
+}
+module ImageSave {
+  internal  {
+    frame = "1289 809 112 64"
+    moduleGroupName = "CT image processing"
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "767 320 401 500"
+        sizeHint = "401 500"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = ImageSaveCT
+    taskVerboseLogging = FALSE
+    filename = "D:/Dokumente/Uni/Master/Masterarbeit/Documents/MeVis/ImageData/RIDER Lung PET-CT/RIDER-1542248368\\Test55_angle0.0_scale1.0_1.0_noise_Uniform100.0CT.tiff"
+    format = TIFF
+    comment = MeVisLab
+    allowOverwrite = TRUE
+    autoFilename = FALSE
+    sourceName = ""
+    postfix = .result1
+    dicomNameUsed = TRUE
+    dicomMetaHeader = TRUE
+    dicomDerived = TRUE
+    dicomDerivedImageType = "OTHER\\MEVISLAB"
+    dicomDiscardTags = FrameSpecific
+    dicomStoreTimeInfo = None
+    dicomSetWindow = FALSE
+    dicomWindowCenter = 0
+    dicomWindowWidth = 0
+    dicomIgnoreHalfVoxelShift = FALSE
+    tiffCompression = None
+    tiffTileX = 128
+    tiffTileY = 128
+    tiffTileXAuto = TRUE
+    tiffTileYAuto = TRUE
+    saveDicomHeaderOnly = FALSE
+    pngCompression = Default
+    pngInterlaced = FALSE
+    jpegQuality = 75
+    jpegProgressive = FALSE
+  }
+}
+module ImageSave {
+  internal  {
+    frame = "1529 812 120 64"
+    moduleGroupName = "PET image processing"
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "850 294 456 500"
+        sizeHint = "401 500"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = ImageSavePET
+    taskVerboseLogging = FALSE
+    filename = "D:/Dokumente/Uni/Master/Masterarbeit/Documents/MeVis/ImageData/RIDER Lung PET-CT/RIDER-1542248368\\Test55_angle0.0_scale1.0_1.0_noise_Uniform100.0PET.tiff"
+    format = TIFF
+    comment = MeVisLab
+    allowOverwrite = TRUE
+    autoFilename = FALSE
+    sourceName = ""
+    postfix = .result1
+    dicomNameUsed = TRUE
+    dicomMetaHeader = TRUE
+    dicomDerived = TRUE
+    dicomDerivedImageType = "OTHER\\MEVISLAB"
+    dicomDiscardTags = FrameSpecific
+    dicomStoreTimeInfo = None
+    dicomSetWindow = FALSE
+    dicomWindowCenter = 0
+    dicomWindowWidth = 0
+    dicomIgnoreHalfVoxelShift = FALSE
+    tiffCompression = None
+    tiffTileX = 128
+    tiffTileY = 128
+    tiffTileXAuto = TRUE
+    tiffTileYAuto = TRUE
+    saveDicomHeaderOnly = FALSE
+    pngCompression = Default
+    pngInterlaced = FALSE
+    jpegQuality = 75
+    jpegProgressive = FALSE
+  }
+}
+module SubImage {
+  internal  {
+    frame = "1293 1225 104 64"
+    moduleGroupName = "CT image processing"
+    windows  {
+      window _default {
+        geometry = "173 319 395 533"
+        sizeHint = "395 533"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SubImageCT
+    boxInput = "0 0 0 0 0 0 -1 -1 -1 -1 -1 -1"
+    autoApplyBox = FALSE
+    correctForNegativeSubImageExtents = FALSE
+    enableBoxClamping = FALSE
+    x = 0
+    sx = 32
+    modifyX = FALSE
+    y = 0
+    sy = 32
+    modifyY = FALSE
+    z = 55
+    sz = 32
+    modifyZ = TRUE
+    c = 0
+    sc = 1
+    modifyC = FALSE
+    t = 0
+    st = 1
+    modifyT = FALSE
+    u = 0
+    su = 1
+    modifyU = FALSE
+    fillValue = 0
+    mode = VoxelStartSize
+    autoApply = TRUE
+  }
+}
+module SubImage {
+  internal  {
+    frame = "1533 1148 112 64"
+    moduleGroupName = "PET image processing"
+    windows  {
+      window _default {
+        geometry = "770 304 395 533"
+        sizeHint = "395 533"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SubImagePET
+    boxInput = "0 0 0 0 0 0 -1 -1 -1 -1 -1 -1"
+    autoApplyBox = FALSE
+    correctForNegativeSubImageExtents = FALSE
+    enableBoxClamping = FALSE
+    x = 0
+    sx = 32
+    modifyX = FALSE
+    y = 0
+    sy = 32
+    modifyY = FALSE
+    z = 55
+    sz = 32
+    modifyZ = TRUE
+    c = 0
+    sc = 1
+    modifyC = FALSE
+    t = 0
+    st = 1
+    modifyT = FALSE
+    u = 0
+    su = 1
+    modifyU = FALSE
+    fillValue = 0
+    mode = VoxelStartSize
+    autoApply = TRUE
+  }
+}
+module Info {
+  internal  {
+    frame = "1673 1229 64 56"
+    moduleGroupName = "PET image processing"
+    windows  {
+      window _automatic {
+        geometry = "717 270 500 600"
+        sizeHint = "260 223"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = InfoPET
+  }
+}
+module Info {
+  internal  {
+    frame = "1197 1221 56 56"
+    moduleGroupName = "CT image processing"
+    windows  {
+      window _automatic {
+        geometry = "357 285 500 600"
+        sizeHint = "260 223"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = InfoCT
+  }
+}
+module Threshold {
+  internal  {
+    frame = "1545 1072 88 56"
+    moduleGroupName = "PET image processing"
+    windows  {
+      window _default {
+        geometry = "811 327 439 364"
+        sizeHint = "248 294"
+        wasOpen = no
+      }
+      window _automatic {
+        geometry = "0 0 0 0"
+        sizeHint = "260 223"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = Threshold
+    threshold = 33729.3661276067
+    relativeThreshold = FALSE
+    comparisonOperator = Greater
+    conditionTrueWriteValue = UserDef
+    userConditionTrueValue = 1
+    conditionFalseWriteValue = UserDef
+    userConditionFalseValue = 0
+  }
+}
+connections  {
+  ScaleCT.input0 = SubImageCT.output0
+  AddNoise.input0 = AffineTransformation2DCT.output0
+  AffineTransformation2DCT.input0 = ScaleCT.output0
+  AffineTransformation2DPET.input0 = Threshold.output0
+  Window.input0 = AddNoise.output0
+  ScalePET.input0 = AffineTransformation2DPET.output0
+  ImageSaveCT.input0 = Window.output0
+  ImageSavePET.input0 = ScalePET.output0
+  SubImagePET.input0 = Reformat.output0
+  Threshold.input0 = SubImagePET.output0
+}
+networkModel  {
+  parentItems  {
+    0  {
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 33
+        objectName = "CT image processing"
+        parentUniqueId = 0
+        color  {
+          r = 45
+          g = 226
+          b = 226
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 65
+        objectName = "PET image processing"
+        parentUniqueId = 0
+        color  {
+          r = 45
+          g = 226
+          b = 226
+          a = 40
+        }
+      }
+    }
+  }
+}

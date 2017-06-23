@@ -1,0 +1,19 @@
+//----------------------------------------------------------------------------------
+//! DataPreperation module definition
+/*!
+// \file    DataPreperation.def
+// \author  Christina
+// \date    2017-05-09
+*/
+//----------------------------------------------------------------------------------
+
+
+MacroModule DataPreperation {
+  genre              = "Generators"
+  author             = "Christina"
+  comment            = "Prepares PET and CT Data for Deep Learning"
+  keywords           = ""
+  seeAlso            = ""
+   
+  externalDefinition = "$(LOCAL)/DataPreperation.script"
+}

@@ -1,0 +1,192 @@
+//----------------------------------------------------------------
+/*!
+// \file    DataPreperation.script
+// \author  Christina
+// \date    2017-05-09
+//
+// Prepares PET and CT Data for Deep Learning
+*/
+//----------------------------------------------------------------
+
+
+
+Interface {
+  Inputs {
+    Field inputCT  { internalName = SubImageCT.input0 }
+    Field inputCT  { internalName = InfoCT.input0 }
+    Field inputCT  { internalName = Reformat.input1 }
+    Field inputPET { internalName = Reformat.input0 }
+    Field inputPET { internalName = InfoPET.input0 }
+  }
+  Outputs {} 
+  Parameters { 
+    Field Threshold       { internalName = Threshold.threshold }
+    Field ThresholdRatio  { type = Float value = 0.2}
+    Field exportPath      { type = String }
+    Field exportFileName  { type = String }
+    Field export          { type = Trigger }
+    Field progress        { type = Float editable = No }
+    Field exportAllSlices { type = Bool value = true}
+    Field startSlice      { 
+      type = Integer
+      min  = 1
+      max  = InfoCT.sizeZ
+    }
+    Field endSlice        { 
+      type = Integer
+      min  = 2
+      max  = InfoCT.sizeZ
+    }
+    Field rotation      { type = Bool value = true}
+    Field maxAngle      { 
+      type  = Float 
+      value = 45
+      min   = 0
+      max   = 180
+    }   
+    Field numAngles    { 
+      type  = Int 
+      value = 4
+      min   = 1
+      max   = 10
+    }
+    Field scaling      { type = Bool value = true }
+    Field scaleRange   { 
+      type  = Float 
+      value = 0.1
+      min   = 0.05
+      max   = 0.15
+    }
+    Field numScalesX   { 
+      type  = Int 
+      value = 2
+      min   = 0
+      max   = 5
+    }
+    Field numScalesY   { 
+      type  = Int 
+      value = 2 
+      min   = 0
+      max   = 5
+    } 
+    Field addNoise      { type = Bool value = true }
+    Field noiseSlices   { type = Int  value = 2 }
+    Field noiseType     { internalName = AddNoise.noiseType }
+    Field maxAmplitude  { 
+      type  = Float 
+      value = 1500
+      min   = 500
+      max   = 2500
+    }
+    Field maxSigma      { 
+      type  = Float 
+      value = 500
+      min   = 100
+      max   = 1000
+    }
+    Field maxDensity    { 
+      type  = Float 
+      value = 0.2
+      min   = 0.05
+      max   = 0.5
+    } 
+    Field calcSliceNumber { type = Trigger }
+    Field totalSlices     { type = Int }
+  }
+}
+
+Commands {
+  source = $(LOCAL)/DataPreperation.py  
+  FieldListener Threshold {
+    init    = yes
+    command = setThreshold
+  }
+  FieldListener calcSliceNumber {
+    init    = Yes
+    command = calcSliceNumber
+  }
+  FieldListener export {
+    command = exportCT
+    command = exportPET
+  }
+}
+
+Window {
+  Category {
+    Box "Export" {
+      Field exportPath { browseButton = Yes browseMode = directory }
+      Field exportFileName {}
+      Horizontal {
+        CheckBox exportAllSlices {}
+        Field startSlice { title = "Export slices from:" dependsOn = !exportAllSlices }
+        Field endSlice   { title = "to:" dependsOn = !exportAllSlices }
+      }  
+    }
+    Category {
+      Box "Data Augmentation" {
+        CheckBox rotation {}
+        Horizontal {
+          Field maxAngle    { title = "Maximal rotation angle (degrees):" dependsOn = rotation }
+          Field numAngles    { title = "Number of rotations per slice:" dependsOn = rotation }
+        }
+        Separator {}
+        Horizontal {
+          CheckBox scaling    {}
+          Field scaleRange    { title = "Maximal scale factor:" dependsOn = scaling }
+        }
+        Horizontal {
+          Field numScalesX { title = "Number of scalings in x-Direction:" dependsOn = scaling }
+          Field numScalesY { title = "Number of scalings in y-Direction:" dependsOn = scaling }
+        }
+        Separator {}
+        Horizontal {
+          CheckBox addNoise { title = "Noise"}
+          Field noiseSlices { title = "Number of noisy slices:" dependsOn = addNoise }
+        }
+        Horizontal {
+          ButtonBar noiseType {
+            dependsOn = addNoise
+            direction = vertical
+            show      = radio
+            tooltip   = "Noise Model"
+            items  {
+              item Uniform      { }
+              item Gaussian     { title = "Zero-mean Gaussian" }
+              item SaltPepper   { title = "Salt and Pepper" }
+            } 
+          }
+          TabView  {
+            expandX = no
+            name    = paraTabView
+            mode    = invisible
+            alignY  = Center
+            TabViewItem  {
+              Field maxAmplitude { title = "Maximal amplitude:" alignY = Center dependsOn = addNoise }
+            }
+            TabViewItem  {
+              Field maxSigma    { title = "Maximal standard deviation:" alignY = Center step = 1 stepstep = 10 dependsOn = addNoise }
+            }
+            TabViewItem  {
+              Field maxDensity { title = "Maximal density:" alignY = Center dependsOn = addNoise }
+            } 
+          } 
+        }
+        Separator {}
+        Horizontal {
+          Field  totalSlices { title = "Total Number of slices created from each dataset:" alignX = Left }
+          Button calcSliceNumber { title = "Calculate"  alignX = Right}
+        }
+      }
+      FieldListener noiseType { 
+        init    = yes
+        command = switchNoiseType
+      }
+    }
+    Box {
+      Horizontal {
+        ProgressBar progress {}
+        Button export {}
+      }
+    }
+  }
+}
