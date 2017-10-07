@@ -18,6 +18,14 @@ def setThreshold():
   maxSUV = ctx.field("InfoPET.maxValue").value
   ctx.field("Threshold.threshold").value = maxSUV * ctx.field("ThresholdRatio").value
   pass
+
+def setWindow():
+  minval = ctx.field("InfoCT.minValue").value
+  maxval = ctx.field("InfoCT.maxValue").value
+  range = abs(minval) + maxval
+  factor = 65535 / range
+  ctx.field("Window.windowCenter").value = factor * 2800
+  pass
     
 def getSlices():
   if ctx.field("exportAllSlices").value == True:
@@ -62,8 +70,11 @@ def getNoiseLevels():
 def setProgress(p):
   ctx.field("progress").value = p
 
-def getExportPath():
-  return ctx.field("exportPath").value
+def getExportPathImage():
+  return ctx.field("exportPathImage").value
+
+def getExportPathLabel():
+  return ctx.field("exportPathLabel").value
 
 def getExportFileName():
   return ctx.field("exportFileName").value
@@ -100,7 +111,7 @@ def calcSliceNumber():
   SliceNumber = inputSlices * rotations * scalesX * scalesY * noiseSlices
   ctx.field("totalSlices").value = SliceNumber
   
-def augmentAndSafe(name, exportPath, exportFileName, sliceNumber):
+def augmentAndSafe(name, exportPath, exportFileName, i):
   angles = getRotationAngles()
   scalesX, scalesY = getScales()
   noise, noiseType = getNoiseLevels()
@@ -121,13 +132,13 @@ def augmentAndSafe(name, exportPath, exportFileName, sliceNumber):
             ctx.field("AddNoise.amplitude").value = 0
             ctx.field("AddNoise.sigma").value = 0
             ctx.field("AddNoise.density").value = 0
-          completeFileName = os.path.join(exportPath, exportFileName + str(sliceNumber) + "_" + "angle" + str(round(r, 2)) + "_scale" + str(round(x, 2)) + "_" + str(round(y, 2)) + "_noise_" + noiseType + str(round(n, 2)) + name + ".tiff")
+          completeFileName = os.path.join(exportPath, exportFileName + str(i) + "_" + "angle" + str(round(r, 2)) + "_scale" + str(round(x, 2)) + "_" + str(round(y, 2)) + "_noise_" + noiseType + str(round(n, 2)) + name + ".tiff")
           ctx.field("ImageSave" + name + ".filename").value = completeFileName
-          ctx.field("SubImage" + name + ".z").value = sliceNumber
+          ctx.field("SubImage" + name + ".z").value = i
           ctx.field("ImageSave" + name + ".startTaskSynchronous").touch()
   
 def exportCT(field):
-  exportPath = getExportPath()
+  exportPath = getExportPathImage()
   startSlice, endSlice = getSlices()
   numSlices = endSlice - startSlice
   setProgress(0)
@@ -135,13 +146,13 @@ def exportCT(field):
     exportFileName = getExportFileName()    
     for i in range(startSlice, endSlice):  
       augmentAndSafe("CT", exportPath, exportFileName, i) 
-      setProgress(float(i)/float(numSlices))
+      setProgress(float(i)/float(ctx.field("totalSlices").value))
     setProgress(1)
   else:
     print "Directory does not exists", exportPath  
     
 def exportPET(field):
-  exportPath = getExportPath()
+  exportPath = getExportPathLabel()
   startSlice, endSlice = getSlices()
   numSlices = endSlice - startSlice
   setProgress(0)
@@ -149,7 +160,7 @@ def exportPET(field):
     exportFileName = getExportFileName()
     for i in range(startSlice, endSlice):
       augmentAndSafe("PET", exportPath, exportFileName, i) 
-      setProgress(float(i)/float(numSlices))
+      setProgress(float(i)/float(ctx.field("totalSlices").value))
     setProgress(1)
   else:
     print "Directory does not exists", exportPath  

@@ -2,52 +2,123 @@
 network  {
   watchlist = ""
 }
+module ImageLoad {
+  internal  {
+    frame = "201 709 112 56"
+    moduleGroupName = ""
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "730 392 474 357"
+        sizeHint = "474 357"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = ImageLoad
+    filename = F:/TrainingData/Labels/1284094278_101_angle20.0_scale0.9_1.0_noise_Gaussian500.0PET.tiff
+    autoLoad = TRUE
+    readRaw = FALSE
+    rawX = 1
+    rawY = 1
+    rawZ = 1
+    rawC = 1
+    rawT = 1
+    rawU = 1
+    dataTypeRaw = "unsigned int8"
+    planarConfig = Contiguous
+    byteOrder = LittleEndian
+    dataOffset = 0
+    pageSizeHint = "0 0 0 0 0 0"
+    suppressErrorLog = FALSE
+    dicomIgnoreHalfVoxelShift = FALSE
+    suppressMLImageFormatCheckSumTests = FALSE
+  }
+}
+module Scale {
+  internal  {
+    frame = "405 553 184 96"
+    moduleGroupName = ""
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "1053 431 238 337"
+        sizeHint = "233 337"
+        wasOpen = no
+      }
+      window _automatic {
+        geometry = "717 270 500 600"
+        sizeHint = "260 223"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = ScaleCT
+    inputMin = -3024
+    inputMax = 3071
+    updateMode = AutoUpdateMinMaxOn
+    useTrueRange = FALSE
+    typeSelect = UInt16
+    outputMin = 0
+    outputMax = 65535
+  }
+}
 module DataPreperation {
   internal  {
-    frame = "1069 445 120 56"
+    frame = "1013 477 152 56"
     moduleGroupName = ""
     windows  {
       window _default {
-        geometry = "924 250 554 528"
-        sizeHint = "554 528"
+        geometry = "1131 233 554 562"
+        sizeHint = "554 562"
+        wasOpen = yes
+      }
+      window _automatic {
+        geometry = "825 270 500 600"
+        sizeHint = "318 274"
         wasOpen = no
       }
     }
   }
   fields  {
     instanceName = DataPreperation
-    Threshold = 0
     ThresholdRatio = 0.2
-    exportPath = "D:/Dokumente/Uni/Master/Masterarbeit/Documents/MeVis/ImageData/RIDER Lung PET-CT/RIDER-1542248368"
-    exportFileName = Test
+    Threshold = 12289.1324651223
+    WindowCenter = 30106.316
+    WindowWidth = 3600
+    exportPathImage = F:/TestingData/Images
+    exportPathLabel = F:/TestingData/Labels
+    exportFileName = 6525572907_
     exportAllSlices = FALSE
-    startSlice = 1
-    endSlice = 2
+    startSlice = 25
+    endSlice = 60
     rotation = TRUE
-    maxAngle = 45
+    maxAngle = 20
     numAngles = 3
     scaling = TRUE
     scaleRange = 0.1
     numScalesX = 3
     numScalesY = 3
-    addNoise = FALSE
+    addNoise = TRUE
     noiseSlices = 2
     noiseType = Gaussian
     maxAmplitude = 500
     maxSigma = 500
     maxDensity = 0.2
-    totalSlices = 0
+    totalSlices = 1890
   }
 }
 module View3D {
   internal  {
-    frame = "801 221 144 56"
+    frame = "697 245 144 56"
     moduleGroupName = ""
     windows  {
       window _default {
         geometry = "354 138 1385 645"
         sizeHint = "1004 645"
-        wasOpen = yes
+        wasOpen = no
       }
     }
   }
@@ -70,17 +141,17 @@ module View3D {
     orientationLocation = LOWER_RIGHT
     orientationOn = TRUE
     orientationModel = CUBE
-    greyCenter = 0.744999945163727
-    greyWidth = 0.490000009536743
+    greyCenter = 0.774999797344208
+    greyWidth = 0.510000109672546
     alphaFactor = 1
     colorFactor = "1 1 1"
     camType = TRUE
-    camPosition = "512.888488769531 -1516.56066894531 -309.799987792969"
-    camOrientation = "-0.971943140029907 -0.168391138315201 -0.164228156208992 4.76498126983643"
+    camPosition = "125.124656677246 -1489.33508300781 -373.37646484375"
+    camOrientation = "-0.96663099527359 0.120654337108135 -0.225980311632156 4.70267248153687"
     initialCameraOrientation = CAMERA_KEEP_AS_IS
-    camFar = 2271.0122
-    camNear = 940.6842
-    camFocal = 1605.8481
+    camFar = 1897.1609
+    camNear = 1091.7172
+    camFocal = 1494.0386
     camHeight = 0.78539801
     decoration = FALSE
     hiResRendering = TRUE
@@ -129,13 +200,13 @@ module View3D {
     renderer.light3PolarRho = 0
     renderer.sizeOutputX = 512
     renderer.sizeOutputY = 512
-    renderer.sizeOutputZ = 351
+    renderer.sizeOutputZ = 148
     renderer.subVolumeStartX = 0
     renderer.subVolumeStartY = 0
     renderer.subVolumeStartZ = 0
     renderer.subVolumeEndX = 512
     renderer.subVolumeEndY = 512
-    renderer.subVolumeEndZ = 351
+    renderer.subVolumeEndZ = 148
     clip.hideGeometry = FALSE
     clip.on = FALSE
     clip.left = FALSE
@@ -160,13 +231,13 @@ module View3D {
 }
 module SoGVRVolumeRenderer {
   internal  {
-    frame = "845 333 168 56"
+    frame = "753 405 208 56"
     moduleGroupName = ""
     windows  {
       window _default {
         geometry = "1384 323 392 596"
         sizeHint = "392 596"
-        wasOpen = yes
+        wasOpen = no
       }
     }
   }
@@ -196,13 +267,13 @@ module SoGVRVolumeRenderer {
     subVolumeStartZ = 0
     subVolumeEndX = 128
     subVolumeEndY = 128
-    subVolumeEndZ = 267
+    subVolumeEndZ = 223
     zbuffer = TRUE
     permitClipping = TRUE
     drawOnPlanes = TRUE
     sizeOutputX = 128
     sizeOutputY = 128
-    sizeOutputZ = 267
+    sizeOutputZ = 223
     incrementalUpdate = TRUE
     highQualityStaticUpdate = FALSE
     staticRenderingAfterInteractionOnly = FALSE
@@ -264,27 +335,32 @@ module SoGVRVolumeRenderer {
 }
 module Window {
   internal  {
-    frame = "473 405 80 56"
+    frame = "405 453 88 56"
     moduleGroupName = ""
     windows  {
       window _default {
-        geometry = "866 538 207 64"
+        geometry = "274 584 207 64"
         sizeHint = "202 64"
+        wasOpen = no
+      }
+      window _automatic {
+        geometry = "225 302 500 600"
+        sizeHint = "260 223"
         wasOpen = no
       }
     }
   }
   fields  {
     instanceName = Window
-    windowCenter = 50
-    windowWidth = 350
-    imageMin = -3024
-    imageMax = 3071
+    windowCenter = 30106.316
+    windowWidth = 3600
+    imageMin = 0
+    imageMax = 65535
   }
 }
 module Threshold {
   internal  {
-    frame = "877 469 88 56"
+    frame = "805 529 104 56"
     moduleGroupName = ""
     windows  {
       window _default {
@@ -301,7 +377,7 @@ module Threshold {
   }
   fields  {
     instanceName = Threshold
-    threshold = 22364.1987707525
+    threshold = 12289.1324651223
     relativeThreshold = FALSE
     comparisonOperator = Greater
     conditionTrueWriteValue = UserDef
@@ -312,11 +388,11 @@ module Threshold {
 }
 module itkImageFileReader {
   internal  {
-    frame = "597 593 136 64"
+    frame = "649 734 176 80"
     moduleGroupName = ""
     windows  {
       window _default {
-        geometry = "153 367 483 417"
+        geometry = "60 390 483 417"
         sizeHint = "304 395"
         wasOpen = yes
       }
@@ -324,7 +400,7 @@ module itkImageFileReader {
   }
   fields  {
     instanceName = CT
-    fileDataType = float
+    fileDataType = int32
     autoDetermineDataType = FALSE
     correctSubVoxelShift = TRUE
     fileDimension = 3
@@ -341,12 +417,12 @@ NRRD_kinds[2] : domain
 NRRD_space : left-posterior-superior
 "
     suppressErrorPosting = FALSE
-    unresolvedFileName = "$(NETWORK)/ImageData/RIDER Lung PET-CT/RIDER-1542248368/3 CT 2.nrrd"
+    unresolvedFileName = "D:/Masterarbeit/Documents/MeVis/ImageData/RIDER Lung PET-CT/RIDER-6525572907/3 Recon 2 CTAC 2.nrrd"
   }
 }
 module SoView2DOverlay {
   internal  {
-    frame = "577 325 160 56"
+    frame = "497 389 192 56"
     moduleGroupName = ""
     showNetworkPanel = true
     windows  {
@@ -406,13 +482,13 @@ module SoView2DOverlay {
 }
 module View2D {
   internal  {
-    frame = "485 221 120 56"
+    frame = "469 245 120 56"
     moduleGroupName = ""
     windows  {
       window _default {
-        geometry = "1240 134 417 421"
+        geometry = "1225 263 417 421"
         sizeHint = "400 400"
-        wasOpen = yes
+        wasOpen = no
       }
       window _automatic {
         geometry = "68 251 500 600"
@@ -426,7 +502,7 @@ module View2D {
     inventorInputOn = TRUE
     inventorOutputOn = FALSE
     view2DExtensionsOn = TRUE
-    startSlice = 175
+    startSlice = 74
     numSlices = 1
     numXSlices = 1
     sliceStep = 1
@@ -451,8 +527,8 @@ module View2D {
     sliceOrigin = "0 0"
     useShaders = TRUE
     useManagedInteraction = FALSE
-    lutCenter = 23.5
-    lutWidth = 6095
+    lutCenter = 32767.5
+    lutWidth = 65535
     annotationOn = TRUE
     annotationMode = ANNO_MODE_AUTO
     annotationSizeMode = ANNO_SHOW_DETAILED
@@ -473,11 +549,11 @@ module View2D {
 }
 module itkImageFileReader {
   internal  {
-    frame = "861 593 136 64"
+    frame = "937 734 176 80"
     moduleGroupName = ""
     windows  {
       window _default {
-        geometry = "1182 309 440 417"
+        geometry = "561 380 440 419"
         sizeHint = "304 395"
         wasOpen = yes
       }
@@ -485,7 +561,7 @@ module itkImageFileReader {
   }
   fields  {
     instanceName = PET
-    fileDataType = float
+    fileDataType = double
     autoDetermineDataType = FALSE
     correctSubVoxelShift = TRUE
     fileDimension = 3
@@ -502,17 +578,21 @@ NRRD_kinds[2] : domain
 NRRD_space : left-posterior-superior
 "
     suppressErrorPosting = FALSE
-    unresolvedFileName = "$(NETWORK)/ImageData/RIDER Lung PET-CT/RIDER-1542248368/6 PET FDG SUV_4.nrrd"
+    unresolvedFileName = "D:/Masterarbeit/Documents/MeVis/ImageData/RIDER Lung PET-CT/RIDER-6525572907/401 PET FDG SUV.nrrd"
   }
 }
 connections  {
+  ScaleCT.input0 = CT.output0
   DataPreperation.inputCT = CT.output0
   DataPreperation.inputPET = PET.output0
   View3D.inImage = CT.output0
   View3D.inInvPreLUT = SoGVRVolumeRenderer.self
   SoGVRVolumeRenderer.image = Threshold.output0
-  Window.input0 = CT.output0
+  Window.input0 = ScaleCT.output0
+  Window.windowCenter = DataPreperation.WindowCenter
+  Window.windowWidth = DataPreperation.WindowWidth
   Threshold.input0 = PET.output0
+  Threshold.threshold = DataPreperation.Threshold
   SoView2DOverlay.image = Threshold.output0
   SoView2DOverlay.timePoint = View2D.timePoint
   View2D.inImage = Window.output0

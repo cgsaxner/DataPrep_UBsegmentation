@@ -20,9 +20,12 @@ Interface {
   }
   Outputs {} 
   Parameters { 
+    Field ThresholdRatio  { type = Float value = 0.2 }
     Field Threshold       { internalName = Threshold.threshold }
-    Field ThresholdRatio  { type = Float value = 0.2}
-    Field exportPath      { type = String }
+    Field WindowCenter    { internalName = Window.windowCenter }
+    Field WindowWidth     { internalName = Window.windowWidth  }
+    Field exportPathImage { type = String }
+    Field exportPathLabel { type = String }
     Field exportFileName  { type = String }
     Field export          { type = Trigger }
     Field progress        { type = Float editable = No }
@@ -59,13 +62,13 @@ Interface {
     }
     Field numScalesX   { 
       type  = Int 
-      value = 2
+      value = 3
       min   = 0
       max   = 5
     }
     Field numScalesY   { 
       type  = Int 
-      value = 2 
+      value = 3 
       min   = 0
       max   = 5
     } 
@@ -97,15 +100,13 @@ Interface {
 
 Commands {
   source = $(LOCAL)/DataPreperation.py  
-  FieldListener Threshold {
-    init    = yes
-    command = setThreshold
-  }
   FieldListener calcSliceNumber {
     init    = Yes
     command = calcSliceNumber
   }
   FieldListener export {
+    command = setThreshold
+    command = setWindow
     command = exportCT
     command = exportPET
   }
@@ -114,7 +115,8 @@ Commands {
 Window {
   Category {
     Box "Export" {
-      Field exportPath { browseButton = Yes browseMode = directory }
+      Field exportPathImage { browseButton = Yes browseMode = directory }
+      Field exportPathLabel { browseButton = Yes browseMode = directory }
       Field exportFileName {}
       Horizontal {
         CheckBox exportAllSlices {}

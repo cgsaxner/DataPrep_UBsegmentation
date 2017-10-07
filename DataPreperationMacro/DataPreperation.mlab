@@ -4,14 +4,19 @@ network  {
 }
 module Scale {
   internal  {
-    frame = "1253 1133 184 72"
+    frame = "1661 1302 184 96"
     moduleGroupName = "CT image processing"
     showNetworkPanel = true
     windows  {
       window _default {
         geometry = "1053 431 238 337"
         sizeHint = "233 337"
-        wasOpen = yes
+        wasOpen = no
+      }
+      window _automatic {
+        geometry = "717 270 500 600"
+        sizeHint = "260 223"
+        wasOpen = no
       }
     }
   }
@@ -28,13 +33,13 @@ module Scale {
 }
 module AddNoise {
   internal  {
-    frame = "1301 973 88 56"
+    frame = "1701 1123 104 56"
     moduleGroupName = "CT image processing"
     windows  {
       window _default {
         geometry = "875 502 387 215"
         sizeHint = "353 215"
-        wasOpen = yes
+        wasOpen = no
       }
       window _automatic {
         geometry = "1353 270 500 600"
@@ -48,7 +53,7 @@ module AddNoise {
     amplitude = 2500
     addInput = TRUE
     randSeed = -1
-    noiseType = SaltPepper
+    noiseType = Gaussian
     mean = 0
     sigma = 500
     sigmaIn = 0
@@ -59,7 +64,7 @@ module AddNoise {
 }
 module AffineTransformation2D {
   internal  {
-    frame = "1257 1049 176 64"
+    frame = "1641 1191 224 80"
     moduleGroupName = "CT image processing"
     windows  {
       window _automatic {
@@ -76,18 +81,18 @@ module AffineTransformation2D {
   }
   fields  {
     instanceName = AffineTransformation2DCT
-    optParameters = "0 0 0 0 1 1 "
+    optParameters = "0 0 0.34906585 0 1.1 1.1 "
     translationX = 0
     translationY = 0
-    rotation = 0
+    rotation = 0.349065850398889
     shearing = 0
-    scalingX = 1
-    scalingY = 1
+    scalingX = 1.10000000149012
+    scalingY = 1.10000000149012
   }
 }
 module AffineTransformation2D {
   internal  {
-    frame = "1497 988 184 64"
+    frame = "1918 1172 232 80"
     moduleGroupName = "PET image processing"
     windows  {
       window _default {
@@ -104,18 +109,18 @@ module AffineTransformation2D {
   }
   fields  {
     instanceName = AffineTransformation2DPET
-    optParameters = "0 0 0 0 1 1 "
+    optParameters = "0 0 0.34906585 0 1.1 1.1 "
     translationX = 0
     translationY = 0
-    rotation = 0
+    rotation = 0.349065850398889
     shearing = 0
-    scalingX = 1
-    scalingY = 1
+    scalingX = 1.10000000149012
+    scalingY = 1.10000000149012
   }
 }
 module Reformat {
   internal  {
-    frame = "1545 1232 104 56"
+    frame = "1982 1448 104 56"
     moduleGroupName = "PET image processing"
     windows  {
       window _default {
@@ -136,7 +141,7 @@ module Reformat {
     scale = "1 1 1"
     rotation = "0 0 1 0"
     translation = "0 0 0"
-    center = "-0.379786999999993 -0.37978700000005 -435.25"
+    center = "-0.488409000000019 -0.488409000000075 -409"
     fillValue = 0
     interactive = TRUE
     autoCenter = TRUE
@@ -160,13 +165,13 @@ module Reformat {
 }
 module Window {
   internal  {
-    frame = "1305 893 80 56"
+    frame = "1709 1051 88 56"
     moduleGroupName = "CT image processing"
     windows  {
       window _default {
         geometry = "838 519 266 64"
         sizeHint = "202 64"
-        wasOpen = yes
+        wasOpen = no
       }
     }
   }
@@ -180,7 +185,7 @@ module Window {
 }
 module Scale {
   internal  {
-    frame = "1497 896 184 72"
+    frame = "1942 1054 184 96"
     moduleGroupName = "PET image processing"
     showNetworkPanel = true
     windows  {
@@ -204,7 +209,7 @@ module Scale {
 }
 module ImageSave {
   internal  {
-    frame = "1289 809 112 64"
+    frame = "1685 935 136 96"
     moduleGroupName = "CT image processing"
     showNetworkPanel = true
     windows  {
@@ -218,7 +223,7 @@ module ImageSave {
   fields  {
     instanceName = ImageSaveCT
     taskVerboseLogging = FALSE
-    filename = "D:/Dokumente/Uni/Master/Masterarbeit/Documents/MeVis/ImageData/RIDER Lung PET-CT/RIDER-1542248368\\Test55_angle0.0_scale1.0_1.0_noise_Uniform100.0CT.tiff"
+    filename = "F:/TrainingData/Images\\2479814957_15_angle20.0_scale1.1_1.1_noise_Gaussian500.0CT.tiff"
     format = TIFF
     comment = MeVisLab
     allowOverwrite = TRUE
@@ -249,7 +254,7 @@ module ImageSave {
 }
 module ImageSave {
   internal  {
-    frame = "1529 812 120 64"
+    frame = "1962 936 144 96"
     moduleGroupName = "PET image processing"
     showNetworkPanel = true
     windows  {
@@ -263,7 +268,7 @@ module ImageSave {
   fields  {
     instanceName = ImageSavePET
     taskVerboseLogging = FALSE
-    filename = "D:/Dokumente/Uni/Master/Masterarbeit/Documents/MeVis/ImageData/RIDER Lung PET-CT/RIDER-1542248368\\Test55_angle0.0_scale1.0_1.0_noise_Uniform100.0PET.tiff"
+    filename = "F:/TrainingData/Labels\\2479814957_15_angle20.0_scale1.1_1.1_noise_Gaussian500.0PET.tiff"
     format = TIFF
     comment = MeVisLab
     allowOverwrite = TRUE
@@ -294,7 +299,7 @@ module ImageSave {
 }
 module SubImage {
   internal  {
-    frame = "1293 1225 104 64"
+    frame = "1689 1433 128 80"
     moduleGroupName = "CT image processing"
     windows  {
       window _default {
@@ -316,8 +321,8 @@ module SubImage {
     y = 0
     sy = 32
     modifyY = FALSE
-    z = 55
-    sz = 32
+    z = 15
+    sz = 1
     modifyZ = TRUE
     c = 0
     sc = 1
@@ -335,7 +340,7 @@ module SubImage {
 }
 module SubImage {
   internal  {
-    frame = "1533 1148 112 64"
+    frame = "1966 1332 136 80"
     moduleGroupName = "PET image processing"
     windows  {
       window _default {
@@ -357,8 +362,8 @@ module SubImage {
     y = 0
     sy = 32
     modifyY = FALSE
-    z = 55
-    sz = 32
+    z = 15
+    sz = 1
     modifyZ = TRUE
     c = 0
     sc = 1
@@ -376,7 +381,7 @@ module SubImage {
 }
 module Info {
   internal  {
-    frame = "1673 1229 64 56"
+    frame = "2114 1436 96 80"
     moduleGroupName = "PET image processing"
     windows  {
       window _automatic {
@@ -392,7 +397,7 @@ module Info {
 }
 module Info {
   internal  {
-    frame = "1197 1221 56 56"
+    frame = "1577 1433 80 80"
     moduleGroupName = "CT image processing"
     windows  {
       window _automatic {
@@ -408,7 +413,7 @@ module Info {
 }
 module Threshold {
   internal  {
-    frame = "1545 1072 88 56"
+    frame = "1982 1264 104 56"
     moduleGroupName = "PET image processing"
     windows  {
       window _default {
