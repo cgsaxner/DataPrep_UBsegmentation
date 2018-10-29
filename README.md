@@ -1,6 +1,6 @@
 # Exploit 18F-FDG enhanced urinary bladder in PET data for Deep Learning Ground Truth Generation in CT scans
 
-MeVisLab macro module for preparation of Training Data for urinary bladder segmentation.
+MeVisLab macro module for the preparation of training and testing data for urinary bladder segmentation using deep learning.
 
 Contains a general network for loading and vizualisation of CT and PET data, as well as the DataPreparation macro module for the generation of a ground truth from PET data and data augmentation.
 
