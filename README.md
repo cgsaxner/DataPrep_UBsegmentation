@@ -17,6 +17,7 @@ To use the network, you need:
 ```git clone https://github.com/cgsaxner/DataPrep_UBsegmentation.git```
 2. Open the ```generalNetwork.mlab``` in MeVisLab
 3. To use the ```DataPreperationMacro``` Module, import it to the general network by navigating to **File -> Add Local Macro...** and importing the ```DataPreparation.script``` file located in the DataPreparationMacro folder.
+4. You can specify all desired parameters for augmentation and data generation in the panel of the ```DataPreperationMacro``` Module.
 
 ## License
 
