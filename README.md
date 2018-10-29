@@ -22,7 +22,7 @@ To use the network, you need:
 
 If you use the software/network, please cite the following paper:
 
-Gsaxner, Christina et al. "Exploit 18F-FDG Enhanced Urinary Bladder in PET Data for Deep Learning Ground Truth Generation in CT Scans". SPIE Medical Imaging 2018.
+Gsaxner, Christina et al. **Exploit 18F-FDG Enhanced Urinary Bladder in PET Data for Deep Learning Ground Truth Generation in CT Scans.** SPIE Medical Imaging 2018.
 
     @inproceedings{gsaxner2018exploit,
       title={Exploit 18 F-FDG enhanced urinary bladder in PET data for deep learning ground truth generation in CT scans},
