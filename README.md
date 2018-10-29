@@ -20,6 +20,10 @@ To use the network, you need:
 
 ## License
 
+This project is licensed under the terms of the MIT license. 
+
+## Using the software
+
 If you use the software/network, please cite the following paper:
 
 Gsaxner, Christina et al. **Exploit 18F-FDG Enhanced Urinary Bladder in PET Data for Deep Learning Ground Truth Generation in CT Scans.** SPIE Medical Imaging 2018.
