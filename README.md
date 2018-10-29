@@ -20,7 +20,7 @@ To use the network, you need:
 
 ## License
 
-This project is licensed under the terms of the MIT license. 
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Using the software
 
